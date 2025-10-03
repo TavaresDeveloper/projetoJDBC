@@ -1,9 +1,7 @@
 package produtoDAO;
 
 import connection.ConnectionFactory;
-import jdk.internal.org.jline.terminal.TerminalBuilder;
 import produtos.Produto;
-
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,10 +19,9 @@ public class produtoDAO {
         try(Connection conn= ConnectionFactory.getConnection();
             PreparedStatement pst = conn.prepareStatement(sql)){
 
-            pst.setInt(1, produto.getProdutoID());
-            pst.setString(2,produto.getProdutoNome());
-            pst.setDouble(3, produto.getProdutoPreco());
-            pst.setInt(4, produto.getProdutoQTD());
+            pst.setString(1,produto.getProdutoNome());
+            pst.setDouble(2, produto.getProdutoPreco());
+            pst.setInt(3, produto.getProdutoQTD());
             pst.executeUpdate();
             System.out.println("Produto cadastrado com Sucesso!");
 
@@ -43,7 +40,7 @@ public class produtoDAO {
 
           try(Connection con = ConnectionFactory.getConnection();
               PreparedStatement pst = con.prepareStatement(sql);
-              ResultSet rs = pst.executeQuery();) {
+              ResultSet rs = pst.executeQuery()) {
 
               while (rs.next()){
 
@@ -55,7 +52,7 @@ public class produtoDAO {
 
 
               }
-              System.out.println("Produtos listdos com sucesso");
+              System.out.println("Produtos listados com sucesso");
           }catch (SQLException e){
 
               System.err.println("Erro ao listar os produtos." + e.getMessage());
